@@ -1,24 +1,8 @@
-# README
+# Runaway
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Runaway is a mock one-way flight booker.
 
-Things you may want to cover:
+This project was completed as part of The Odin Project's Ruby on Rails cirriculum. 
+The assignment can be found [here](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby-on-rails/lessons/building-advanced-forms)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The goal of this project is to get comfortable with building more complex forms. 
