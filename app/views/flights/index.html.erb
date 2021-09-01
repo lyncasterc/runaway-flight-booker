@@ -2,10 +2,16 @@
     <%= f.collection_select :from_airport, @airports, :id, :name, prompt: 'From' %>
     <%= f.collection_select :to_airport, @airports, :id, :name, prompt: 'To' %>
     <%= f.select :start_date, @dates.collect{ |date| [date.strftime('%a, %b %d'), date] }, prompt: 'Start date' %> 
-    <%= f.select :start_date, 1..4, prompt: 'Passengers'  %>
+    <%= f.select :passenger_count, 1..4, prompt: 'Passengers'  %>
     <%= f.submit 'Search' %>
 <% end %>
 
-<% if @flights.present? %> 
-    <%# stuff here %>
+<% if @flights_info.present? %> 
+    <% @flights_info.each do |flight|%>  
+        <h2> <%= flight[:from_airport].airport_code %> - <%= flight[:to_airport].airport_code %> </h2>
+        <h2><%= flight[:start_date].strftime('%a, %b %d')%></h2>
+        
+    <% end %>
+<% else %>
+    <h2>no flights found. Search for a flight!</h2>
 <% end %>
