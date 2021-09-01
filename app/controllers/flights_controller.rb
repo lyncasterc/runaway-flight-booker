@@ -4,6 +4,7 @@ class FlightsController < ApplicationController
     @airports = Airport.all
     @dates = Flight.pluck(:start_date).uniq
     @search = params
+    @passenger_count = params[:passenger_count]
 
     if @search.present?
       flights = Flight.where(start_id: @search[:from_airport], 
