@@ -6,12 +6,24 @@
     <%= f.submit 'Search' %>
 <% end %>
 
-<% if @flights_info.present? %> 
-    <% @flights_info.each do |flight|%>  
-        <h2> <%= flight[:from_airport].airport_code %> - <%= flight[:to_airport].airport_code %> </h2>
-        <h2><%= flight[:start_date].strftime('%a, %b %d')%></h2>
+<% if @flights.present? %> 
+    <% @flights.each do |flight|%>  
+
+        <%= form_with url: new_flight_booking_path(flight), method: :get do |f| %> 
+            <%= f.hidden_field :passenger_count, value: @passenger_count %>
+
+            <h2> 
+                <%= flight.from_airport.airport_code %> - <%= flight.to_airport.airport_code %> 
+            </h2>
+            <h2><%= flight.start_date.strftime('%a, %b %d')%></h2>
+
+            <%= f.submit 'Select' %>
+        <% end %>
+
         
     <% end %>
 <% else %>
     <h2>no flights found. Search for a flight!</h2>
+        
+
 <% end %>
