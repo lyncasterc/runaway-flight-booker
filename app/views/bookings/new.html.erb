@@ -1,0 +1,36 @@
+<h1>New Flight Booking</h1>
+
+<h2> 
+    <%= @flight.from_airport.airport_code %> - <%= @flight.to_airport.airport_code %> 
+</h2>
+
+<h2><%= @flight.start_date.strftime('%a, %b %d')%></h2>
+
+<%= @flight.id %>
+
+<%= simple_form_for @booking, url: flight_bookings_url do |f| %>
+    <%= f.error_notification %>
+    
+    <% if @booking.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+            <ul>
+            <% @booking.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    
+
+    <%= f.simple_fields_for :bookings_passengers do |bp_form| %>
+        <%= bp_form.simple_fields_for :passenger do |p_form| %>
+            <%= p_form.input :name, wrapper: false, required: true %>
+            <%= p_form.input :email, wrapper: false, required: true %>
+
+        <% end %>
+    <% end %>
+
+    <%= f.submit 'Create Booking' %>
+<% end %>
