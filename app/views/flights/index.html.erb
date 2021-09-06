@@ -1,30 +1,89 @@
-<%= form_with url: root_path, method: :get do |f| %>
-    <%= f.collection_select :from_airport, @airports, :id, :name, prompt: 'From' %>
-    <%= f.collection_select :to_airport, @airports, :id, :name, prompt: 'To' %>
-    <%= f.select :start_date, @dates.collect{ |date| [date.strftime('%a, %b %d'), date] }, prompt: 'Start date' %> 
-    <%= f.select :passenger_count, 1..4, prompt: 'Passengers'  %>
-    <%= f.submit 'Search' %>
-<% end %>
+<section id="main-hero" class="hero is-halfheight is-flex is-justify-content-center mb-5">
+    <div class="columns is-vcentered is-justify-content-center is-mobile">
+        <div class="column is-8">
+            <div class="card is-flex is-justify-content-center p-2">
+                <div class="card-content">
+                    <%= form_with url: root_path, method: :get, html: { class: "is-flex is-justify-content-center is-align-items-center is-flex-direction-column" } do |f| %>
 
-<% if @flights.present? %> 
-    <% @flights.each do |flight|%>  
+                        <div class="field is-grouped is-grouped-multiline">
+                            <div class="control ">
+                                <div class="select ">
+                                    <%= f.collection_select :from_airport, @airports, :id, :name, prompt: 'From' %>
+                                </div>
+                            </div>
 
-        <%= form_with url: new_flight_booking_path(flight), method: :get do |f| %> 
-            <%= f.hidden_field :passenger_count, value: @passenger_count %>
+                            <div class="control">
+                                <div class="select">
+                                    <%= f.collection_select :to_airport, @airports, :id, :name, prompt: 'To' %>
+                                </div>
+                            </div>
 
-            <h2> 
-                <%= flight.from_airport.airport_code %> - <%= flight.to_airport.airport_code %> 
-            </h2>
-            
-            <h2><%= flight.start_date.strftime('%a, %b %d')%></h2>
+                            <div class="control">
+                                <div class="select">
+                                    <%= f.select :start_date, @dates.collect{ |date| [date.strftime('%a, %b %d'), date] }, prompt: 'Start date' %> 
+                                </div>
+                            </div>
 
-            <%= f.submit 'Select' %>
-        <% end %>
+                            <div class="control">
+                                <div class="select">
+                                <%= f.select :passenger_count, 1..4, prompt: 'Passengers'  %>
+                                </div>
+                            </div>
+                        </div>
 
-        
-    <% end %>
-<% else %>
-    <h2>no flights found. Search for a flight!</h2>
-        
+                        <%= f.submit 'Search', class: "button is-primary is-rounded " %>
+                    <% end %>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
 
-<% end %>
+
+<section id="flights">
+        <div class="columns is-justify-content-center is-mobile">
+            <div class="column is-8 ">
+            <% if @flights.present? %> 
+                <% @flights.each do |flight|%>  
+
+                    <div class="block p-4 border">
+                        <%= form_with url: new_flight_booking_path(flight), method: :get do |f| %> 
+                            <%= f.hidden_field :passenger_count, value: @passenger_count %>
+
+                            <div class="level">
+                                <div class="level-item">
+                                    <span> 
+                                        <%= flight.from_airport.airport_code %> - <%= flight.to_airport.airport_code %> 
+                                    </span>
+                                </div>
+
+                                <div class="level-item">
+                                    <span><%= flight.start_date.strftime('%a, %b %d')%></span>
+                                </div>
+
+                                <div class="level-item">
+                                    <%= f.submit 'Select', class: "button is-primary is-small" %>
+                                </div>
+                            </div>
+
+
+                        <% end %>
+
+                    </div>
+                <% end %>
+
+            <% end %>
+
+            </div>
+        </div>
+</section>
+
+
+
+
+
+
+
+
+

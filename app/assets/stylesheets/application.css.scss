@@ -14,4 +14,32 @@
  *= require_self
  */
 
- @import "bulma";
+@import "bulma";
+
+html {
+    background-image: image-url("index-hero-bg.jpg");
+    background-size: 0 0;
+}
+
+.has-border-bottom {
+    border-bottom: 1px solid rgb(52, 59, 83);
+}
+
+.border{
+    border: #d0d0d0 1px solid;
+    border-radius: 5px;
+}
+
+#main-hero {
+    background-image: image-url("index-hero-bg.jpg"), 
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+    background-blend-mode: overlay;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#form-controls{
+    display: flex;
+    flex-direction: row;
+}
+
