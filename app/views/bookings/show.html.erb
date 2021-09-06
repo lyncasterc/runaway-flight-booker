@@ -1,14 +1,42 @@
-<h1>Flight Booking</h1>
+<section class="section">
+    <div class="columns is-justify-content-center is-mobile is-vcentered">
+        <div class="column is-8">
+            <h1 class="title mb-6">Your Flight</h1>        
+        
+            <h2 class="subtitle has-text-weight-semibold mb-2"> 
+                <%= @booking.flight.from_airport.name %> to <%= @booking.flight.to_airport.name %> 
+            </h2>
+            <p class="has-text-weight-medium"><%= @booking.flight.start_date.strftime('%a, %b %d')%></p>
 
 
 
-<h2> 
-    <%= @booking.flight.from_airport.airport_code %> - <%= @booking.flight.to_airport.airport_code %> 
-</h2>
+            <div class="container mt-6">
+                <h2 class="subtitle has-text-weight-semibold">Passengers:</h2>
+                <% @booking.passengers.each do |passenger| %>
+                    <p class="has-text-weight-medium">- <%= passenger.name %> </p>
+                <% end %>
+                
+            </div>
 
-<h2><%= @booking.flight.start_date.strftime('%a, %b %d')%></h2>
+        </div>
+    </div>
+</section>
 
-<h2>Passengers</h2>
-<% @booking.passengers.each do |passenger| %>
-    <p> <%= passenger.name %> </p>
-<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

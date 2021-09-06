@@ -1,4 +1,4 @@
-<section id="main-hero" class="hero is-halfheight is-flex is-justify-content-center mb-5">
+<section id="main-hero" class="hero is-halfheight is-flex is-justify-content-center mb-3">
     <div class="columns is-vcentered is-justify-content-center is-mobile">
         <div class="column is-8">
             <div class="card is-flex is-justify-content-center p-2">
@@ -41,7 +41,7 @@
 </section>
 
 
-<section id="flights">
+<section id="flights" class="section">
         <div class="columns is-justify-content-center is-mobile">
             <div class="column is-8 ">
             <% if @flights.present? %> 
@@ -66,13 +66,10 @@
                                     <%= f.submit 'Select', class: "button is-primary is-small" %>
                                 </div>
                             </div>
-
-
                         <% end %>
 
                     </div>
                 <% end %>
-
             <% end %>
 
             </div>

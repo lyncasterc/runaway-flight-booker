@@ -1,36 +1,55 @@
-<h1>New Flight Booking</h1>
+<section class="section">
+    <div class="columns is-justify-content-center is-mobile is-vcentered">
+        <div class="column is-8">
+            <h1 class="title mb-6">Book this flight!</h1>        
+        
+            <h2 class="subtitle has-text-weight-semibold mb-2"> 
+                <%= @flight.from_airport.name %> to <%= @flight.to_airport.name %> 
+            </h2>
+            <p class="has-text-weight-medium"><%= @flight.start_date.strftime('%a, %b %d')%></p>
 
-<h2> 
-    <%= @flight.from_airport.airport_code %> - <%= @flight.to_airport.airport_code %> 
-</h2>
 
-<h2><%= @flight.start_date.strftime('%a, %b %d')%></h2>
+            <%= simple_form_for @booking, url: flight_bookings_url, html: { class: "mt-6" } do |f| %>
+                <%= f.error_notification %>
 
-<%= @flight.id %>
+                <h2 class="subtitle">Enter Passenger Information: </h2>
+                
+                <% if @booking.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+                        <ul>
+                        <% @booking.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
 
-<%= simple_form_for @booking, url: flight_bookings_url do |f| %>
-    <%= f.error_notification %>
-    
-    <% if @booking.errors.any? %>
-        <div id="error_explanation">
-            <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
-            <ul>
-            <% @booking.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+                <%= f.simple_fields_for :bookings_passengers do |bp_form| %>
+                    <%= bp_form.simple_fields_for :passenger do |p_form| %>
+
+                        <div id="passenger-forms" class="block">
+                            <div class="field">
+                                <div class="control">
+                                    <%= p_form.input :name, wrapper: false, required: true, label_html: { class: "label" }, input_html: { class: "input" } %>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <%= p_form.input :email, wrapper: false, required: true, label_html: { class: "label" }, input_html: { class: "input" } %>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <% end %>
+                <% end %>
+
+                <%= f.submit 'Create Booking' %>
             <% end %>
-            </ul>
+
         </div>
-    <% end %>
+    </div>
+</section>
 
-    
-
-    <%= f.simple_fields_for :bookings_passengers do |bp_form| %>
-        <%= bp_form.simple_fields_for :passenger do |p_form| %>
-            <%= p_form.input :name, wrapper: false, required: true %>
-            <%= p_form.input :email, wrapper: false, required: true %>
-
-        <% end %>
-    <% end %>
-
-    <%= f.submit 'Create Booking' %>
-<% end %>
